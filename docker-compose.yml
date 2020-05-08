@@ -1,9 +1,15 @@
 version: '3'
 services:
-    cassandra:
-        image: "cassandra:latest"
+    mongo:
+        build:
+            context: .
+            dockerfile: ./compose/mongodb/Dockerfile
+        image: improved_spoon_mongo
+        volumes:
+            - ./mongo-data:/data/db
         ports:
-            - '7000:7000'
-            - '9042:9042'
-
-
+            - "27017-27019:27017-27019"
+        environment:
+            - MONGO_INITDB_DATABASE=spoon
+            - MONGO_INITDB_ROOT_USERNAME=mongo
+            - MONGO_INITDB_PASSWORD=1qazxsw@
